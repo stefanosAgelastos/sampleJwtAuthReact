@@ -40,13 +40,14 @@ app.get('/api/secret', withAuth, function(req, res) {
 });
 
 app.post('/api/register', function(req, res) {
-  const { email, password } = req.body;
-  const user = new User({ email, password });
+  const { firstName, lastName, email, password } = req.body;
+  const user = new User({ firstName, lastName, email, password });
   user.save(function(err) {
     if (err) {
       console.log(err);
       res.status(500).send("Error registering new user please try again.");
     } else {
+      console.log(firstName, lastName, email, password);
       res.status(200).send("Welcome to the club!");
     }
   });
